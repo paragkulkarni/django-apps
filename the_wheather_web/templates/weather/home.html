@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+  <title>weatherinfo</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static 'css/layout.css' %}">
+</head>
+<body>
+  <div class="jumbotron">
+
+    <div class="container">
+      <h1>Weather Application for city</h1>
+        <form method="POST">
+          {% csrf_token %}
+          {{ form.name }}
+        <input type="submit" value="submit">
+        </form>
+    </div>
+    <hr>
+    <div class="container" style="position:relative;">
+      <div class="d-flex flex-wrap align-content-start bg-light" style="position: relative;">
+
+          {% for city_weather in weather_data %}
+          <div class="p-2 border" style="width:277px;">
+            <strong>City Weather Report</strong>
+                <br>
+                <img src="http://openweathermap.org/img/w/09d.png" class="card-img-top" alt="Image" style="width:100px">
+                <br>
+                CITY NAME : {{ city_weather.city }}
+                <br>
+                CITY TEMPERATURE : {{ city_weather.temperature }}
+                <br>
+                CITY DESCRIPTION : {{ city_weather.description }}
+                <br>
+            </div>
+          {% endfor %}
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
